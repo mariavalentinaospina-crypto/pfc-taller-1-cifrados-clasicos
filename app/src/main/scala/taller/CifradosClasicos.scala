@@ -24,7 +24,23 @@ class CifradosClasicos {
   // Punto 1 -------------------------------------------------------------------
 
   /** César con recursión lineal: una operación pendiente por letra. */
-  def cesar(m: Mensaje, k: Int): Mensaje = ???
+  def cesar(m: Mensaje, k: Int): Mensaje = {
+
+    def cifrar(c: Char): Char = {
+      if(esMinuscula(c)){
+        val pos = c - 'a'
+        val nuevo = ((pos + k) % 26 + 26) % 26
+        ('a' + nuevo).toChar
+      } else {
+        c
+      }
+    }
+    if (m.isEmpty){
+      ""
+    }else{
+      cifrar(m.head) + cesar(m.tail,k)
+    }
+  }
 
   // Punto 2 -------------------------------------------------------------------
 
