@@ -65,7 +65,14 @@ class CifradosClasicos {
    * Supone que la letra más frecuente del mensaje cifrado es la 'e' del
    * original y devuelve la distancia entre las dos. Sin letras, cero.
    */
-  def desplazamientoProbable(m: Mensaje): Int = ???
+  def desplazamientoProbable(m: Mensaje): Int = {
+    val frecs = frecuencias (m)
+    if (frecs.isEmpty) 0
+    else {
+      val letraMasFrecuente = frecs.head._1
+      ((letraMasFrecuente - 'e')%26 + 26) % 26
+    }
+  }
 
   def romperCesar(m: Mensaje): Mensaje = ???
 
