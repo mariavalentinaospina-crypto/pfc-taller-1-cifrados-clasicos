@@ -24,7 +24,23 @@ class CifradosClasicos {
   // Punto 1 -------------------------------------------------------------------
 
   /** César con recursión lineal: una operación pendiente por letra. */
-  def cesar(m: Mensaje, k: Int): Mensaje = ???
+  def cesar(m: Mensaje, k: Int): Mensaje = {
+
+    def cifrar(c: Char): Char = {
+      if(esMinuscula(c)){
+        val pos = c - 'a'
+        val nuevo = ((pos + k) % 26 + 26) % 26
+        ('a' + nuevo).toChar
+      } else {
+        c
+      }
+    }
+    if (m.isEmpty){
+      ""
+    }else{
+      cifrar(m.head) + cesar(m.tail,k)
+    }
+  }
 
   // Punto 2 -------------------------------------------------------------------
 
@@ -60,7 +76,14 @@ class CifradosClasicos {
    * Supone que la letra más frecuente del mensaje cifrado es la 'e' del
    * original y devuelve la distancia entre las dos. Sin letras, cero.
    */
-  def desplazamientoProbable(m: Mensaje): Int = ???
+  def desplazamientoProbable(m: Mensaje): Int = {
+    val frecs = frecuencias (m)
+    if (frecs.isEmpty) 0
+    else {
+      val letraMasFrecuente = frecs.head._1
+      ((letraMasFrecuente - 'e')%26 + 26) % 26
+    }
+  }
 
   def romperCesar(m: Mensaje): Mensaje = ???
 
